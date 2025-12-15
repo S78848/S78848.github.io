@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bento Grid Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Rule 4: Clean, Scientific, and Modern Color Palette */
+        :root {
+            --color-background: #F8F9FA; /* Soft white/light grey */
+            --color-card-background: #FFFFFF; /* Pure white */
+            --color-text-primary: #212529; /* Dark grey/black */
+            --color-text-secondary: #6C757D; /* Medium grey */
+            --color-accent: #0A3D62; /* Ocean Blue (UMT Theme) */
+            --color-border: #E9ECEF; /* Light border grey */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Container for the Bento Grid */
+        .bento-container {
+            width: 100%;
+            max-width: 1200px; 
+            margin: auto;
+            display: grid;
+            gap: 16px; 
+            
+            /* Define the grid columns for desktop layout */
+            grid-template-columns: repeat(6, 1fr); 
+            grid-template-rows: auto auto; 
+
+            /* Define areas for the desktop layout */
+            grid-template-areas:
+                "profile profile profile techstack techstack location"
+                "profile profile profile casestudy hobby hobby"
+                "playlist playlist playlist playlist playlist playlist"; 
+        }
+
+        /* Base Card Styling */
+        .bento-card {
+            background-color: var(--color-card-background);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            min-height: 150px; 
+        }
+
+        .bento-card:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Card-Specific Desktop Grid Area Assignments */
+        #card-1 { grid-area: profile; } 
+        #card-2 { grid-area: location; } 
+        #card-3 { grid-area: techstack; } 
+        #card-4 { grid-area: casestudy; } 
+        #card-5 { grid-area: hobby; } 
+        #card-6 { grid-area: playlist; } 
+
+        /* Content Styling */
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 0;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .icon {
+            color: var(--color-accent);
+        }
+        
+        .card-content p, .card-content ul {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+        
+        .card-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-content li {
+            margin-bottom: 8px;
+        }
+
+        .card-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Profile Specific Styles */
+        .profile-header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 5px 0;
+            line-height: 1.1;
+            color: var(--color-text-primary);
+        }
+        .profile-header p {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin: 0 0 20px 0;
+        }
+        .profile-header .tagline {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .social-links a:hover {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        /* Location Card Specific Styles */
+        #card-2 .card-content {
+            text-align: center;
+        }
+        #card-2 .time-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 10px;
+        }
+
+        /* Playlist Card Specific Styles */
+        #card-6 {
+            min-height: 80px;
+            padding: 16px 24px;
+        }
+        #card-6 .card-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        #card-6 .music-icon {
+            font-size: 2rem;
+            color: var(--color-accent);
+        }
+        .placeholder-player {
+            background-color: var(--color-border);
+            border-radius: 4px;
+            padding: 8px 15px;
+            flex-grow: 1;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .bento-container {
+                /* Reset grid for mobile to a single column */
+                grid-template-columns: 1fr;
+                gap: 12px;
+                /* Reset grid areas to stack all cards vertically in order */
+                grid-template-areas: 
+                    "profile"
+                    "location"
+                    "techstack"
+                    "casestudy"
+                    "hobby"
+                    "playlist";
+            }
+
+            .bento-card {
+                min-height: auto; 
+            }
+
+            /* Adjust profile card for better mobile viewing */
+            .profile-header h1 {
+                font-size: 2rem;
+            }
+            .profile-header p {
+                font-size: 1rem;
+            }
+
+            /* Adjust playlist card */
+            #card-6 .card-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .placeholder-player {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        /* Ensure smooth flow for non-mobile sizes when resizing */
+        @media (min-width: 769px) and (max-width: 1024px) {
+             .bento-container {
+                /* Slightly adjusted layout for medium tablets/laptops */
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-areas:
+                    "profile profile techstack location"
+                    "profile profile casestudy hobby"
+                    "playlist playlist playlist playlist";
+            }
+             #card-3 { grid-area: techstack; } 
+             #card-4 { grid-area: casestudy; } 
+             #card-5 { grid-area: hobby; } 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bento-container">
+
+        <div id="card-1" class="bento-card">
+            <div class="profile-header">
+                <h1>NUR BATRISYIA SYAIRAH</h1>
+                <p>BSc. (Hons) **Food Science** | Year 1</p>
+                <p class="tagline">'Innovating food safety.'</p>
+            </div>
+            <div class="card-content">
+                <p>Hello! I'm a first-year student focusing on the foundational chemistry and scientific principles underlying food production and quality control.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">UMT Portal</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="card-2" class="bento-card">
+            <h3 class="card-title"><span class="icon">📍</span> Location</h3>
+            <div class="card-content">
+                <p>Universiti Malaysia Terengganu (**UMT**)</p>
+                <p style="font-size: 0.9rem; margin-top: -15px;">Kuala Nerus, Terengganu</p>
+                <div class="time-display">10:21 AM</div> 
+            </div>
+        </div>
+
+        <div id="card-3" class="bento-card">
+            <h3 class="card-title"><span class="icon">🔬</span> Core Modules</h3>
+            <div class="card-content">
+                <ul>
+                    <li>**Organic Chemistry** (Foundation)</li>
+                    <li>**Biochemistry** (Metabolic Pathways)</li>
+                    <li>**Engineering Mathematics** (Calculus)</li>
+                    <li>**Physical Chemistry Principles**</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="card-4" class="bento-card">
+            <h3 class="card-title"><span class="icon">📚</span> Recent Project Focus</h3>
+            <div class="card-content">
+                <p>My current focus in laboratory and theoretical work:</p>
+                <p><strong>Title:</strong> <a href="#">Starch Gelatinization in Local Kuih</a></p>
+                <p><em>Description: Analyzing texture and moisture profiles of Kuih Lapis using various starch sources.</em></p>
+            </div>
+        </div>
+
+        <div id="card-5" class="bento-card">
+            <h3 class="card-title"><span class="icon">👩‍🍳</span> Passion</h3>
+            <div class="card-content">
+                <p>**Activity:** Cooking and Recipe Development</p>
+                <p>Applying Food Science concepts directly in the kitchen.</p>
+            </div>
+        </div>
+
+        <div id="card-6" class="bento-card">
+            <div class="card-content">
+                <span class="music-icon">🎧</span>
+                <p class="card-title" style="margin: 0;">Study Soundtrack</p>
+                <div class="placeholder-player">
+                    <p>Now Playing: Classical Music for Concentration (Placeholder for music player integration)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
