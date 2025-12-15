@@ -38,14 +38,13 @@
             display: grid;
             gap: 16px; 
             
-            /* Define the grid columns for desktop layout */
             grid-template-columns: repeat(6, 1fr); 
-            grid-template-rows: auto auto; 
+            grid-template-rows: auto auto auto; 
 
-            /* Define areas for the desktop layout */
+            /* UPDATED LAYOUT */
             grid-template-areas:
                 "profile profile profile techstack techstack location"
-                "profile profile profile casestudy hobby hobby"
+                "profile profile profile casestudy hobby reflection"
                 "playlist playlist playlist playlist playlist playlist"; 
         }
 
@@ -56,7 +55,8 @@
             border-radius: 12px;
             padding: 24px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Theme Tweak: Subtle zoom effect on hover */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between; 
@@ -65,16 +65,25 @@
 
         .bento-card:hover {
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.01); 
         }
 
         /* Card-Specific Desktop Grid Area Assignments */
-        #card-1 { grid-area: profile; } 
+        #card-1 { 
+            grid-area: profile; 
+            /* === UPDATE: Background Image Configuration === */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg.jpg'); /* Added gradient overlay for contrast */
+            background-size: cover;          
+            background-position: center;     
+            color: white;                    
+            border: none;                    
+        } 
         #card-2 { grid-area: location; } 
         #card-3 { grid-area: techstack; } 
         #card-4 { grid-area: casestudy; } 
         #card-5 { grid-area: hobby; } 
         #card-6 { grid-area: playlist; } 
+        #card-7 { grid-area: reflection; } 
 
         /* Content Styling */
         .card-title {
@@ -86,7 +95,30 @@
             align-items: center;
             gap: 8px;
         }
+        
+        /* Profile Text Contrast Fix & Overrides (Crucial for image visibility) */
+        #card-1 h1, 
+        #card-1 .tagline, 
+        #card-1 p {
+            color: white; 
+        }
 
+        #card-1 .social-links a {
+            /* Make social links stand out on the dark background */
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: background-color 0.2s;
+        }
+
+        #card-1 .social-links a:hover {
+            background-color: var(--color-accent); /* Use accent color on hover */
+            color: white;
+        }
+        /* End Profile Overrides */
+
+
+        /* Default Icon and Content Colors for non-profile cards */
         .card-title .icon {
             color: var(--color-accent);
         }
@@ -118,17 +150,14 @@
             font-size: 2.5rem;
             margin: 0 0 5px 0;
             line-height: 1.1;
-            color: var(--color-text-primary);
         }
         .profile-header p {
             font-size: 1.1rem;
-            color: var(--color-text-secondary);
             margin: 0 0 20px 0;
         }
         .profile-header .tagline {
             font-style: italic;
             font-weight: 500;
-            color: var(--color-accent);
             margin-top: -10px;
             margin-bottom: 20px;
             font-size: 1rem;
@@ -138,21 +167,7 @@
             gap: 15px;
             margin-top: 15px;
         }
-        .social-links a {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 6px;
-            background-color: var(--color-background);
-            color: var(--color-text-primary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .social-links a:hover {
-            background-color: var(--color-accent);
-            color: white;
-        }
-
+        
         /* Location Card Specific Styles */
         #card-2 .card-content {
             text-align: center;
@@ -195,16 +210,15 @@
             }
             
             .bento-container {
-                /* Reset grid for mobile to a single column */
                 grid-template-columns: 1fr;
                 gap: 12px;
-                /* Reset grid areas to stack all cards vertically in order */
                 grid-template-areas: 
                     "profile"
                     "location"
                     "techstack"
                     "casestudy"
                     "hobby"
+                    "reflection" 
                     "playlist";
             }
 
@@ -212,7 +226,6 @@
                 min-height: auto; 
             }
 
-            /* Adjust profile card for better mobile viewing */
             .profile-header h1 {
                 font-size: 2rem;
             }
@@ -220,7 +233,6 @@
                 font-size: 1rem;
             }
 
-            /* Adjust playlist card */
             #card-6 .card-content {
                 flex-direction: column;
                 align-items: flex-start;
@@ -235,16 +247,15 @@
         /* Ensure smooth flow for non-mobile sizes when resizing */
         @media (min-width: 769px) and (max-width: 1024px) {
              .bento-container {
-                /* Slightly adjusted layout for medium tablets/laptops */
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-areas:
                     "profile profile techstack location"
-                    "profile profile casestudy hobby"
+                    "profile profile casestudy reflection"
+                    "hobby hobby hobby hobby" 
                     "playlist playlist playlist playlist";
             }
-             #card-3 { grid-area: techstack; } 
-             #card-4 { grid-area: casestudy; } 
-             #card-5 { grid-area: hobby; } 
+             #card-7 { grid-area: reflection; } 
+             #card-5 { grid-area: hobby; }
         }
 
     </style>
@@ -273,7 +284,7 @@
             <div class="card-content">
                 <p>Universiti Malaysia Terengganu (**UMT**)</p>
                 <p style="font-size: 0.9rem; margin-top: -15px;">Kuala Nerus, Terengganu</p>
-                <div class="time-display">10:21 AM</div> 
+                <div class="time-display">11:14 AM</div> 
             </div>
         </div>
 
@@ -305,13 +316,25 @@
                 <p>Applying Food Science concepts directly in the kitchen.</p>
             </div>
         </div>
+        
+        <div id="card-7" class="bento-card">
+            <h3 class="card-title"><span class="icon">💡</span> Why Food Tech Matters in Malaysia</h3>
+            <div class="card-content">
+                <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
+                <p style="font-size: 0.85rem; margin-top: 15px; font-style: italic;">#FoodSecurity #Innovation</p>
+            </div>
+        </div>
 
         <div id="card-6" class="bento-card">
             <div class="card-content">
                 <span class="music-icon">🎧</span>
                 <p class="card-title" style="margin: 0;">Study Soundtrack</p>
                 <div class="placeholder-player">
-                    <p>Now Playing: Classical Music for Concentration (Placeholder for music player integration)</p>
+                    <p>Now Playing: <iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut
+m_source=generator&theme=0" width="100%" height="152" frameBorder="0"
+allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
+fullscreen; picture-in-picture" loading="lazy"></iframe></p>
                 </div>
             </div>
         </div>
