@@ -145,6 +145,29 @@
             font-weight: 500;
         }
 
+        /* New Button Styling */
+        .btn-focus {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--color-accent);
+            color: #FFFFFF !important;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-accent);
+            text-align: center;
+        }
+
+        .btn-focus:hover {
+            background-color: #FFFFFF;
+            color: var(--color-accent) !important;
+            box-shadow: 0 4px 10px rgba(10, 61, 98, 0.2);
+            transform: translateY(-2px);
+        }
+
         /* Profile Specific Styles */
         .profile-header h1 {
             font-size: 2.5rem;
@@ -306,6 +329,7 @@
                 <p>My current focus in laboratory and theoretical work:</p>
                 <p><strong>Title:</strong> <a href="#">Starch Gelatinization in Local Kuih</a></p>
                 <p><em>Description: Analyzing texture and moisture profiles of Kuih Lapis using various starch sources.</em></p>
+                <a href="https://s78848.github.io/focus-timer-app/my-focus-app.html" class="btn-focus">Try My Focus Timer App</a>
             </div>
         </div>
 
