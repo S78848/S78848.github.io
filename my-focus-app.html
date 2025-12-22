@@ -3,354 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Companion | Lofi Study Buddy</title>
+    <title>Student Bento Grid Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
     <style>
+        /* Rule 4: Clean, Scientific, and Modern Color Palette */
         :root {
-            --bg-color: #f0e7db;
-            --card-bg: #ffffffb3;
-            --accent-soft: #ffadad; /* Pastel Red */
-            --accent-focus: #ffd6a5; /* Pastel Orange */
-            --accent-happy: #caffbf; /* Pastel Green */
-            --text-color: #5d576b;
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --btn-try-it: #9d81ba; /* Muted Purple */
+            --color-background: #F8F9FA; /* Soft white/light grey */
+            --color-card-background: #FFFFFF; /* Pure white */
+            --color-text-primary: #212529; /* Dark grey/black */
+            --color-text-secondary: #6C757D; /* Medium grey */
+            --color-accent: #0A3D62; /* Ocean Blue (UMT Theme) */
+            --color-border: #E9ECEF; /* Light border grey */
         }
 
+        /* Base Styles */
         body {
-            background-color: var(--bg-color);
-            background-image: linear-gradient(135deg, #f0e7db 25%, #eaddcf 100%);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
             margin: 0;
-            padding: 20px 0;
-        }
-
-        .container {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-            width: 340px;
-            border: 4px solid #fff;
-        }
-
-        #pet-display {
-            font-size: 6rem;
-            margin-bottom: 0.5rem;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translate(0, 0px); }
-            50% { transform: translate(0, -15px); }
-            100% { transform: translate(0, -0px); }
-        }
-
-        #timer-display {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin: 0.5rem 0;
-            color: var(--text-color);
-            letter-spacing: -2px;
-        }
-
-        .controls {
+            padding: 20px;
             display: flex;
-            gap: 10px;
             justify-content: center;
-            margin-top: 1rem;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-            font-family: var(--font-main);
-            color: #fff;
-            box-shadow: 0 3px 0px rgba(0,0,0,0.1);
-        }
-
-        button:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        .btn-start { background-color: #9bf6ff; color: #5d576b; }
-        .btn-pause { background-color: #fdffb6; color: #5d576b; }
-        .btn-reset { background-color: #ffadad; color: #fff; }
-
-        /* --- TRY IT BUTTON --- */
-        .btn-try-container {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid rgba(255,255,255,0.5);
-        }
-
-        .btn-try {
-            display: inline-block;
-            background-color: var(--btn-try-it);
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(157, 129, 186, 0.3);
-        }
-
-        .btn-try:hover {
-            transform: translateY(-3px);
-            background-color: #8a6ca8;
-            box-shadow: 0 6px 20px rgba(157, 129, 186, 0.4);
-        }
-
-        .status-text {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.6;
-        }
-
-        /* --- TO DO LIST STYLES --- */
-        .todo-section {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 2px dashed #ffffff;
-            text-align: left;
-        }
-
-        .todo-input-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 1rem;
-        }
-
-        input[type="text"] {
-            flex-grow: 1;
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #fff;
-            background: rgba(255,255,255,0.5);
-            outline: none;
-            font-family: var(--font-main);
-        }
-
-        .btn-add { background-color: #caffbf; color: #5d576b; }
-        .btn-clear { 
-            background: none; 
-            color: var(--text-color); 
-            box-shadow: none; 
-            font-size: 0.7rem; 
-            opacity: 0.6; 
-            padding: 5px;
-            margin-top: 10px;
+        /* Container for the Bento Grid */
+        .bento-container {
             width: 100%;
-        }
-        .btn-clear:hover { opacity: 1; text-decoration: underline; }
+            max-width: 1200px; 
+            margin: auto;
+            display: grid;
+            gap: 16px; 
+            
+            grid-template-columns: repeat(6, 1fr); 
+            grid-template-rows: auto auto auto; 
 
-        #todo-list {
+            /* UPDATED LAYOUT */
+            grid-template-areas:
+                "profile profile profile techstack techstack location"
+                "profile profile profile casestudy hobby reflection"
+                "playlist playlist playlist playlist playlist playlist"; 
+        }
+
+        /* Base Card Styling */
+        .bento-card {
+            background-color: var(--color-card-background);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            /* Theme Tweak: Subtle zoom effect on hover */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            min-height: 150px; 
+        }
+
+        .bento-card:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px) scale(1.01); 
+        }
+
+        /* Card-Specific Desktop Grid Area Assignments */
+        #card-1 { 
+            grid-area: profile; 
+            /* === UPDATE: Background Image Configuration === */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg.jpg'); /* Added gradient overlay for contrast */
+            background-size: cover;          
+            background-position: center;     
+            color: white;                    
+            border: none;                    
+        } 
+        #card-2 { grid-area: location; } 
+        #card-3 { grid-area: techstack; } 
+        #card-4 { grid-area: casestudy; } 
+        #card-5 { grid-area: hobby; } 
+        #card-6 { grid-area: playlist; } 
+        #card-7 { grid-area: reflection; } 
+
+        /* Content Styling */
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 0;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Profile Text Contrast Fix & Overrides (Crucial for image visibility) */
+        #card-1 h1, 
+        #card-1 .tagline, 
+        #card-1 p {
+            color: white; 
+        }
+
+        #card-1 .social-links a {
+            /* Make social links stand out on the dark background */
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: background-color 0.2s;
+        }
+
+        #card-1 .social-links a:hover {
+            background-color: var(--color-accent); /* Use accent color on hover */
+            color: white;
+        }
+        /* End Profile Overrides */
+
+
+        /* Default Icon and Content Colors for non-profile cards */
+        .card-title .icon {
+            color: var(--color-accent);
+        }
+        
+        .card-content p, .card-content ul {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+        
+        .card-content ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 200px;
-            overflow-y: auto;
         }
 
-        .todo-item {
-            background: rgba(255,255,255,0.4);
-            margin-bottom: 6px;
-            padding: 10px;
+        .card-content li {
+            margin-bottom: 8px;
+        }
+
+        .card-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* New Button Styling */
+        .btn-focus {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--color-accent);
+            color: #FFFFFF !important;
             border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-accent);
+            text-align: center;
+        }
+
+        .btn-focus:hover {
+            background-color: #FFFFFF;
+            color: var(--color-accent) !important;
+            box-shadow: 0 4px 10px rgba(10, 61, 98, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Profile Specific Styles */
+        .profile-header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 5px 0;
+            line-height: 1.1;
+        }
+        .profile-header p {
+            font-size: 1.1rem;
+            margin: 0 0 20px 0;
+        }
+        .profile-header .tagline {
+            font-style: italic;
+            font-weight: 500;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        /* Location Card Specific Styles */
+        #card-2 .card-content {
+            text-align: center;
+        }
+        #card-2 .time-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 10px;
+        }
+
+        /* Playlist Card Specific Styles */
+        #card-6 {
+            min-height: 80px;
+            padding: 16px 24px;
+        }
+        #card-6 .card-content {
             display: flex;
             align-items: center;
-            font-size: 0.9rem;
-            user-select: none;
+            gap: 20px;
+        }
+        #card-6 .music-icon {
+            font-size: 2rem;
+            color: var(--color-accent);
+        }
+        .placeholder-player {
+            background-color: var(--color-border);
+            border-radius: 4px;
+            padding: 8px 15px;
+            flex-grow: 1;
+            color: var(--color-text-secondary);
+            font-style: italic;
         }
 
-        .todo-item:hover { background: rgba(255,255,255,0.7); }
 
-        .completed {
-            text-decoration: line-through;
-            opacity: 0.5;
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .bento-container {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                grid-template-areas: 
+                    "profile"
+                    "location"
+                    "techstack"
+                    "casestudy"
+                    "hobby"
+                    "reflection" 
+                    "playlist";
+            }
+
+            .bento-card {
+                min-height: auto; 
+            }
+
+            .profile-header h1 {
+                font-size: 2rem;
+            }
+            .profile-header p {
+                font-size: 1rem;
+            }
+
+            #card-6 .card-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .placeholder-player {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
+
+        /* Ensure smooth flow for non-mobile sizes when resizing */
+        @media (min-width: 769px) and (max-width: 1024px) {
+             .bento-container {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-areas:
+                    "profile profile techstack location"
+                    "profile profile casestudy reflection"
+                    "hobby hobby hobby hobby" 
+                    "playlist playlist playlist playlist";
+            }
+             #card-7 { grid-area: reflection; } 
+             #card-5 { grid-area: hobby; }
+        }
+
     </style>
 </head>
 <body>
-    <a href="https://s78848.github.io" style="position:absolute; top:20px; left:20px; color: var(--text-color); text-decoration: none; font-weight: bold;">← Back to Home</a>
+    <div class="bento-container">
 
-    <div class="container">
-        <div id="pet-display" class="floating">😴</div>
-        <div id="timer-display">25:00</div>
-        
-        <div class="status-text" id="status-label">Sleeping...</div>
-
-        <div class="controls">
-            <button class="btn-start" onclick="startTimer()">Start</button>
-            <button class="btn-pause" onclick="pauseTimer()">Pause</button>
-            <button class="btn-reset" onclick="resetTimer()">Reset</button>
-        </div>
-
-        <div class="btn-try-container">
-            <a href="https://s78848.github.io/focus-timer-app/my-focus-app.html" class="btn-try" target="_blank">Try My Focus Timer App</a>
-        </div>
-
-        <div class="todo-section">
-            <div class="todo-input-group">
-                <input type="text" id="todo-input" placeholder="Add a task...">
-                <button class="btn-add" onclick="addTodo()">Add</button>
+        <div id="card-1" class="bento-card">
+            <div class="profile-header">
+                <h1>NUR BATRISYIA SYAIRAH</h1>
+                <p>BSc. (Hons) **Food Science** | Year 1</p>
+                <p class="tagline">'Innovating food safety.'</p>
             </div>
-            <ul id="todo-list"></ul>
-            <button class="btn-clear" onclick="clearTodos()">Clear All Tasks</button>
+            <div class="card-content">
+                <p>Hello! I'm a first-year student focusing on the foundational chemistry and scientific principles underlying food production and quality control.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">UMT Portal</a>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <audio id="finish-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+        <div id="card-2" class="bento-card">
+            <h3 class="card-title"><span class="icon">📍</span> Location</h3>
+            <div class="card-content">
+                <p>Universiti Malaysia Terengganu (**UMT**)</p>
+                <p style="font-size: 0.9rem; margin-top: -15px;">Kuala Nerus, Terengganu</p>
+                <div class="time-display">11:14 AM</div> 
+            </div>
+        </div>
 
-    <script>
-        // Timer Logic
-        let timeLeft = 25 * 60;
-        let timerInterval = null;
+        <div id="card-3" class="bento-card">
+            <h3 class="card-title"><span class="icon">🔬</span> Core Modules</h3>
+            <div class="card-content">
+                <ul>
+                    <li>**Organic Chemistry** (Foundation)</li>
+                    <li>**Biochemistry** (Metabolic Pathways)</li>
+                    <li>**Engineering Mathematics** (Calculus)</li>
+                    <li>**Physical Chemistry Principles**</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="card-4" class="bento-card">
+            <h3 class="card-title"><span class="icon">📚</span> Recent Project Focus</h3>
+            <div class="card-content">
+                <p>My current focus in laboratory and theoretical work:</p>
+                <p><strong>Title:</strong> <a href="#">Starch Gelatinization in Local Kuih</a></p>
+                <p><em>Description: Analyzing texture and moisture profiles of Kuih Lapis using various starch sources.</em></p>
+                <a href="https://s78848.github.io/focus-timer-app/my-focus-app.html" class="btn-focus">Try My Focus Timer App</a>
+            </div>
+        </div>
+
+        <div id="card-5" class="bento-card">
+            <h3 class="card-title"><span class="icon">👩‍🍳</span> Passion</h3>
+            <div class="card-content">
+                <p>**Activity:** Cooking and Recipe Development</p>
+                <p>Applying Food Science concepts directly in the kitchen.</p>
+            </div>
+        </div>
         
-        const petEl = document.getElementById('pet-display');
-        const timerEl = document.getElementById('timer-display');
-        const statusEl = document.getElementById('status-label');
-        const finishSound = document.getElementById('finish-sound');
+        <div id="card-7" class="bento-card">
+            <h3 class="card-title"><span class="icon">💡</span> Why Food Tech Matters in Malaysia</h3>
+            <div class="card-content">
+                <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
+                <p style="font-size: 0.85rem; margin-top: 15px; font-style: italic;">#FoodSecurity #Innovation</p>
+            </div>
+        </div>
 
-        function updateDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
+        <div id="card-6" class="bento-card">
+            <div class="card-content">
+                <span class="music-icon">🎧</span>
+                <p class="card-title" style="margin: 0;">Study Soundtrack</p>
+                <div class="placeholder-player">
+                    <p>Now Playing: <iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut
+m_source=generator&theme=0" width="100%" height="152" frameBorder="0"
+allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
+fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+                </div>
+            </div>
+        </div>
 
-        function startTimer() {
-            if (timerInterval) return;
-            petEl.textContent = "😎";
-            statusEl.textContent = "Focused & Working";
-            timerInterval = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateDisplay();
-                } else {
-                    completeSession();
-                }
-            }, 1000);
-        }
-
-        function pauseTimer() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            if (timeLeft > 0) {
-                petEl.textContent = "😴";
-                statusEl.textContent = "Taking a Break";
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timeLeft = 25 * 60;
-            updateDisplay();
-            petEl.textContent = "😴";
-            statusEl.textContent = "Sleeping...";
-        }
-
-        function completeSession() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            petEl.textContent = "🥳";
-            statusEl.textContent = "Great Job!";
-            finishSound.play();
-        }
-
-        // --- TO DO LIST LOGIC ---
-        const todoInput = document.getElementById('todo-input');
-        const todoList = document.getElementById('todo-list');
-
-        // Load tasks on startup
-        document.addEventListener('DOMContentLoaded', loadTodos);
-
-        // Allow 'Enter' key to add task
-        todoInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addTodo();
-        });
-
-        function addTodo() {
-            const text = todoInput.value.trim();
-            if (text === "") return;
-
-            const todo = {
-                id: Date.now(),
-                text: text,
-                completed: false
-            };
-
-            saveTodoLocally(todo);
-            renderTodo(todo);
-            todoInput.value = "";
-        }
-
-        function renderTodo(todo) {
-            const li = document.createElement('li');
-            li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
-            li.dataset.id = todo.id;
-            li.textContent = todo.text;
-            li.onclick = () => toggleTodo(todo.id);
-            todoList.appendChild(li);
-        }
-
-        function toggleTodo(id) {
-            let todos = JSON.parse(localStorage.getItem('myFocusTasks')) || [];
-            todos = todos.map(t => {
-                if (t.id === id) t.completed = !t.completed;
-                return t;
-            });
-            localStorage.setItem('myFocusTasks', JSON.stringify(todos));
-            refreshList();
-        }
-
-        function saveTodoLocally(todo) {
-            const todos = JSON.parse(localStorage.getItem('myFocusTasks')) || [];
-            todos.push(todo);
-            localStorage.setItem('myFocusTasks', JSON.stringify(todos));
-        }
-
-        function loadTodos() {
-            const todos = JSON.parse(localStorage.getItem('myFocusTasks')) || [];
-            todos.forEach(todo => renderTodo(todo));
-        }
-
-        function refreshList() {
-            todoList.innerHTML = "";
-            loadTodos();
-        }
-
-        function clearTodos() {
-            if (confirm("Clear all tasks?")) {
-                localStorage.removeItem('myFocusTasks');
-                todoList.innerHTML = "";
-            }
-        }
-
-        // Initialize timer display
-        updateDisplay();
-    </script>
+    </div>
 </body>
 </html>
